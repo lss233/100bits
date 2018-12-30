@@ -1,0 +1,55 @@
+.center {
+    margin: auto;
+    width: 1000px;
+}
+.toolbar {
+    height: 200px;
+    background:#FFF;
+    padding-top: 20px;
+}
+.toolbar > .user {
+    border-width: 1px;
+    width: 40px;
+    height: 40px;
+}
+.toolbar > .right {
+    float: right;
+}
+#drawer {
+    background-color: black;
+    position: relative;
+    box-shadow: 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+body {
+    height: 100%;
+    width: 100%;
+    color: rgba(33, 33, 33, 0.87);
+}
+
+/*==================================================
+ * Effect 2
+ * ===============================================*/
+ .effect2
+ {
+   position: relative;
+ }
+ .effect2:before, .effect2:after
+ {
+   z-index: -1;
+   position: absolute;
+   content: "";
+   bottom: 15px;
+   left: 10px;
+   width: 50%;
+   top: 80%;
+   max-width:300px;
+   background: #777;
+   box-shadow: 0 15px 10px #777;
+   transform: rotate(-3deg);
+ }
+ .effect2:after
+ {
+   transform: rotate(3deg);
+   right: 10px;
+   left: auto;
+ }
