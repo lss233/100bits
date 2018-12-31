@@ -21,7 +21,7 @@ function draw(x, y){
     y = Number.parseInt(y / ratio) * ratio
     var imgd = ctx.getImageData(x, y, 1, 1).data
     var p = imgd[1] == 0
-    ctx.fillStyle = p ? '#eee': '#000'
+    ctx.fillStyle = p ? '#fff': '#000'
     ctx.fillRect(x,y,ratio,ratio);
 }
 if (document.body.ontouchstart !== undefined) {
@@ -60,10 +60,14 @@ $(document).ready(function() {
         if(isReserve){
             progressbar.val(progressbar.val() - 1)
             point = last[progressbar.val()]
+            if(point == undefined)
+                return
             draw(point[0], point[1])
             $('[data-label=user]').text(point[2])
         } else {
             point = last[progressbar.val()]
+            if(point == undefined)
+                return
             draw(point[0], point[1])
             $('[data-label=user]').text(point[2])
             progressbar.val(progressbar.val() + 1)
@@ -154,8 +158,9 @@ $(document).ready(function() {
     })
     uploadBtn.click(function(){
         UIkit.notification('正在上传...');
-        $.post('api/upload', {
-            points: drewPoints
+        $.post('upload', {
+            points: drewPoints,
+            _token:$("input[name='_token']").val()
         })
          .then(res => {
             UIkit.notification('上传成功!');
