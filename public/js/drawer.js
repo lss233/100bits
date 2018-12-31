@@ -15,6 +15,7 @@ function record(x, y){
         }
     }
     drewPoints.push([x, y])
+    $('[data-label=countLeft').text(countLeft - drewPoints.length)
 }
 function draw(x, y){
     x = Number.parseInt(x / ratio) * ratio
@@ -27,22 +28,28 @@ function draw(x, y){
 if (document.body.ontouchstart !== undefined) {
     // Mobile
     canvas.ontouchstart = function (e) {
-        var x = e.touches[0].clientX - canvas.offsetLeft
-        var y = e.touches[0].clientY - canvas.offsetTop
-        draw(x,y)
-        record(x,y)
+
+        var x = e.touches[0].pageX - canvas.offsetLeft
+        var y = e.touches[0].pageY - canvas.offsetTop
+        if(countLeft - drewPoints.length > 0){
+            draw(x,y)
+            record(x,y)
+        }
     }
 } else {
     canvas.onmousedown = function(e) {
-        var x = e.clientX - canvas.offsetLeft
-        var y = e.clientY - canvas.offsetTop
-        draw(x,y)
-        record(x,y)
+        var x = e.pageX  - canvas.offsetLeft
+        var y = e.pageY - canvas.offsetTop
+        if(countLeft - drewPoints.length > 0){
+            draw(x,y)
+            record(x,y)
+        }
     }
 }
 
 
 $(document).ready(function() {
+    window.countLeft = 100
     var ACTIVED_CSS = 'uk-button-danger'
     var progressbar = $('#progressbar')
     var playProgress = undefined
@@ -114,6 +121,10 @@ $(document).ready(function() {
             last.push([e.x, e.y, e.user])
         });
         progressbar.attr('max', last.length)
+        return $.get('count')
+    }).then(res => {
+        countLeft = 100 - Number.parseInt(res)
+        $('[data-label=countLeft').text(countLeft - drewPoints.length)
     })
     nextBtn.click(performDrew)
     prevBtn.click(() => {

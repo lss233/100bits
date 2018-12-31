@@ -24,8 +24,13 @@
                         @csrf
                         <button class="uk-button uk-button-primary btn-upload">上传</button>
                     @endguest
-
                     </div>
+                    @guest
+                    @else
+                        <div style="margin-left: 50px">
+                            <span>剩余:&nbsp;</span><span data-label="countLeft">?</span>
+                        </div>
+                    @endguest
                 </div>
             </div>
         </div>

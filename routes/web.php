@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::middleware('auth')->get('/count', 'DrawController@count');
 Route::post('/upload', 'DrawController@update');

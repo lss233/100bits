@@ -15,7 +15,13 @@ class DrawController extends Controller
     {
         if (!Auth::check())
             return response('Unauthorized', 403);
+        $count = Draw::whereDate('created_at', Carbon::now())
+            ->where('user_id', '=', Auth::user()->id)
+            ->count();
         foreach ($request->input("points") as $e) {
+            if($count >= 100)
+                break;
+            $count++;
             $draw = new Draw();
             $draw->x = $e[0];
             $draw->y = $e[1];
@@ -24,6 +30,14 @@ class DrawController extends Controller
             $draw->save();
         }
 
-        return "OK";
+        return $count;
+    }
+
+    public function count(Request $request){
+        if (!Auth::check())
+            return response('Unauthorized', 403);
+        return Draw::whereDate('created_at', Carbon::now())
+        ->where('user_id', '=', Auth::user()->id)
+        ->count();
     }
 }
