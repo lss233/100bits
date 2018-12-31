@@ -124,6 +124,14 @@ $(document).ready(function() {
         countLeft = 100 - Number.parseInt(res)
         $('[data-label=countLeft').text(countLeft - drewPoints.length)
     })
+
+    $.get('api/plate')
+      .then(res => {
+        var plate = new Image()
+        plate.src = res.url
+        ctx.drawImage(plate, 0, 0)
+    })
+
     nextBtn.click(performDrew)
     prevBtn.click(() => {
         isReserve = true
