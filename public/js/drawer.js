@@ -164,7 +164,7 @@ $(document).ready(function() {
             inactiveBtn(playBtn)
         } else {
             activeBtn(playBtn)
-            playProgress = setInterval(performDrew, 200);
+            playProgress = setInterval(performDrew, 50);
         }
     })
     resetBtn.click(function(){
