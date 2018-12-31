@@ -2,12 +2,7 @@ var DECLARE = "别看了，乱七八糟的 浪费时间。"
 eval("'"+DECLARE + "'")
 var canvas = document.getElementById('drawer');
 var ctx = canvas.getContext('2d');
-function resize() {
-    canvas.width = 1000;
-    canvas.height = 500;
-}
 var ratio = 2
-resize()
 drewPoints = []
 function record(x, y){
     x = Number.parseInt(x / ratio) * ratio
