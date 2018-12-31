@@ -63,23 +63,23 @@ $(document).ready(function() {
     var resetBtn = $('.btn-reset')
     var uploadBtn = $('.btn-upload')
     var performDrew = () => {
-
+        enableBtn(playBtn)
         if(isReserve){
             progressbar.val(progressbar.val() - 1)
             point = last[progressbar.val()]
-            if(point == undefined)
-                return
-            draw(point[0], point[1])
-            $('[data-label=user]').text(point[2])
+            if(point != undefined){
+                draw(point[0], point[1])
+                $('[data-label=user]').text(point[2])
+            }
         } else {
             point = last[progressbar.val()]
-            if(point == undefined)
-                return
-            draw(point[0], point[1])
-            $('[data-label=user]').text(point[2])
+            if(point != undefined){
+                draw(point[0], point[1])
+                $('[data-label=user]').text(point[2])
+            }
             progressbar.val(progressbar.val() + 1)
         }
-        if(progressbar.val() >= last.length && !isReserve){
+        if(progressbar.val() == last.length && !isReserve){
             clearInterval(playProgress)
             inactiveBtn(playBtn)
             disableBtn(playBtn)
@@ -87,8 +87,7 @@ $(document).ready(function() {
             disableBtn(towardBtn)
             enableBtn(prevBtn)
             enableBtn(backwardBtn)
-            return
-        } else if(progressbar.val() <= 0 && isReserve){
+        } else if(progressbar.val() == 0 && isReserve){
             clearInterval(playProgress)
             inactiveBtn(playBtn)
             disableBtn(playBtn)
@@ -96,9 +95,7 @@ $(document).ready(function() {
             disableBtn(backwardBtn)
             enableBtn(nextBtn)
             enableBtn(towardBtn)
-            return
         }
-        activeBtn(playBtn)
     }
     var isBtnActived = (btn) => {
         return btn.hasClass(ACTIVED_CSS)
@@ -133,22 +130,32 @@ $(document).ready(function() {
         isReserve = false
     })
     towardBtn.click(() => {
-        isReserve = false
-        inactiveBtn(backwardBtn)
-        activeBtn(towardBtn)
+        if(isBtnActived(towardBtn)){
+            clearInterval(playProgress)
+            playProgress = setInterval(performDrew, 2);
+        } else {
+            isReserve = false
+            inactiveBtn(backwardBtn)
+            activeBtn(towardBtn)
+        }
     })
     backwardBtn.click(() => {
-        isReserve = true
-        inactiveBtn(towardBtn)
-        activeBtn(backwardBtn)
-        if(progressbar.val() > 0 && isReserve){
-            activeBtn(playBtn)
-            enableBtn(playBtn)
-            enableBtn(prevBtn)
-            enableBtn(backwardBtn)
-            if(progressbar.val() < last.length)
-                enableBtn(nextBtn)
-            return
+        if(isBtnActived(towardBtn)){
+            clearInterval(playProgress)
+            playProgress = setInterval(performDrew, 2);
+        } else {
+            isReserve = true
+            inactiveBtn(towardBtn)
+            activeBtn(backwardBtn)
+            if(progressbar.val() > 0 && isReserve){
+                activeBtn(playBtn)
+                enableBtn(playBtn)
+                enableBtn(prevBtn)
+                enableBtn(backwardBtn)
+                if(progressbar.val() < last.length)
+                    enableBtn(nextBtn)
+                return
+            }
         }
     })
     playBtn.click(function(){
