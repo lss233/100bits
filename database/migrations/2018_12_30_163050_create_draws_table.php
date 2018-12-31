@@ -17,7 +17,8 @@ class CreateDrawsTable extends Migration
             $table->increments('id');
             $table->integer('x');
             $table->integer('y');
-            $table->integer('user')->nullable(true);
+            $table->string('user');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

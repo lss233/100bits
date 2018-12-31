@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Draw;
+use Illuminate\Support\Carbon;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/pic', 'DrawController@get');
+Route::get('/pic', function(){
+    return Draw::whereMonth(
+                'created_at', '>=', Carbon::now()->subMonth()->month - 1
+            )->get();
+});
 
-Route::post('/upload', 'DrawController@update');
+Route::middleware('auth')->post('/upload', 'DrawController@update');
