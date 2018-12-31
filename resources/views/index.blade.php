@@ -8,11 +8,21 @@
                 <div uk-grid>
                     <progress id="progressbar" class="uk-progress" value="0" max="100"></progress>
 
-                    <button class="uk-button uk-button-default btn-play"><span uk-icon="icon: play"></span></button>
-                    <button class="uk-button uk-button-default btn-next"><span uk-icon="icon: chevron-right"></span></button>
-                    <button class="uk-button uk-button-default btn-prev"><span uk-icon="icon: chevron-left"></span></button>
-                    <button class="uk-button uk-button-danger btn-toward"><span uk-icon="icon: chevron-double-right"></span></button>
-                    <button class="uk-button uk-button-default btn-backward"><span uk-icon="icon: chevron-double-left"></span></button>
+                    <button
+                        uk-tooltip="播放"
+                        class="uk-button uk-button-default btn-play"><span uk-icon="icon: play"></span></button>
+                    <button
+                        uk-tooltip="下一帧"
+                        class="uk-button uk-button-default btn-next"><span uk-icon="icon: chevron-right"></span></button>
+                    <button
+                        uk-tooltip="上一帧"
+                        class="uk-button uk-button-default btn-prev"><span uk-icon="icon: chevron-left"></span></button>
+                    <button
+                        uk-tooltip="正放 / 加速"
+                        class="uk-button uk-button-danger btn-toward"><span uk-icon="icon: chevron-double-right"></span></button>
+                    <button
+                        uk-tooltip="倒放 / 加速"
+                        class="uk-button uk-button-default btn-backward"><span uk-icon="icon: chevron-double-left"></span></button>
                     <div>
                         <span>User:&nbsp;</span><span data-label="user">---</span>
                     </div>

@@ -51,6 +51,7 @@ if (document.body.ontouchstart !== undefined) {
 $(document).ready(function() {
     window.countLeft = 100
     var ACTIVED_CSS = 'uk-button-danger'
+    var DEFAULT_SPEED = 50
     var progressbar = $('#progressbar')
     var playProgress = undefined
     var last = []
@@ -137,10 +138,12 @@ $(document).ready(function() {
             isReserve = false
             inactiveBtn(backwardBtn)
             activeBtn(towardBtn)
+            clearInterval(playProgress)
+            playProgress = setInterval(performDrew, DEFAULT_SPEED);
         }
     })
     backwardBtn.click(() => {
-        if(isBtnActived(towardBtn)){
+        if(isBtnActived(backwardBtn)){
             clearInterval(playProgress)
             playProgress = setInterval(performDrew, 2);
         } else {
@@ -156,6 +159,8 @@ $(document).ready(function() {
                     enableBtn(nextBtn)
                 return
             }
+            clearInterval(playProgress)
+            playProgress = setInterval(performDrew, DEFAULT_SPEED);
         }
     })
     playBtn.click(function(){
@@ -164,7 +169,7 @@ $(document).ready(function() {
             inactiveBtn(playBtn)
         } else {
             activeBtn(playBtn)
-            playProgress = setInterval(performDrew, 50);
+            playProgress = setInterval(performDrew, DEFAULT_SPEED);
         }
     })
     resetBtn.click(function(){
