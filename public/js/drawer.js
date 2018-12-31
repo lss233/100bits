@@ -7,9 +7,6 @@ function resize() {
     canvas.height = 500;
 }
 var ratio = 2
-window.onresize = function () {
-    resize();
-};
 resize()
 drewPoints = []
 function record(x, y){
