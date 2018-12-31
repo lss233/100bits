@@ -112,7 +112,7 @@ $(document).ready(function() {
     var enableBtn = (btn) => {
         return btn.attr('disabled', false)
     }
-    $.get('/api/pic')
+    $.get('api/pic')
      .then(res =>{
         res.forEach(e => {
             last.push([e.x, e.y, e.user])
@@ -162,7 +162,7 @@ $(document).ready(function() {
     })
     uploadBtn.click(function(){
         UIkit.notification('正在上传...');
-        $.post('/api/upload', {
+        $.post('api/upload', {
             points: drewPoints
         })
          .then(res => {
