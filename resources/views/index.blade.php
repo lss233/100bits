@@ -13,7 +13,7 @@
                     <button class="uk-button uk-button-default btn-prev"><span uk-icon="icon: chevron-left"></span></button>
                     <button class="uk-button uk-button-danger btn-toward"><span uk-icon="icon: chevron-double-right"></span></button>
                     <button class="uk-button uk-button-default btn-backward"><span uk-icon="icon: chevron-double-left"></span></button>
-                    <div style="margin-left: 50px">
+                    <div>
                         <span>User:&nbsp;</span><span data-label="user">---</span>
                     </div>
                     <div class="right">
@@ -27,7 +27,7 @@
                     </div>
                     @guest
                     @else
-                        <div style="margin-left: 50px">
+                        <div>
                             <span>剩余:&nbsp;</span><span data-label="countLeft">?</span>
                         </div>
                     @endguest
