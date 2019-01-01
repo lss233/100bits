@@ -28,6 +28,10 @@ function draw(x, y){
 if (document.body.ontouchstart !== undefined) {
     // Mobile
     canvas.ontouchstart = function (e) {
+        if(!window.login){
+            alert('请先登录~')
+            return
+        }
 
         var x = e.touches[0].pageX - canvas.offsetLeft
         var y = e.touches[0].pageY - canvas.offsetTop
@@ -38,6 +42,10 @@ if (document.body.ontouchstart !== undefined) {
     }
 } else {
     canvas.onmousedown = function(e) {
+        if(!window.login){
+            alert('请先登录~')
+            return
+        }
         var x = e.pageX  - canvas.offsetLeft
         var y = e.pageY - canvas.offsetTop
         if(countLeft - drewPoints.length > 0){

@@ -29,9 +29,15 @@
                     <div class="right">
                     <button class="uk-button uk-button-default btn-reset">重置(充满BUG地)</button>
                     @guest
+                        <script>
+                            window.login = false
+                        </script>
                         <a class="uk-button uk-button-primary" href="{{ route('login') }}">登录后才能上传</a>
                     @else
                         @csrf
+                        <script>
+                            window.login = true
+                        </script>
                         <button class="uk-button uk-button-primary btn-upload">上传</button>
                     @endguest
                     </div>
