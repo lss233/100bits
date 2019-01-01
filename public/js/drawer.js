@@ -4,6 +4,11 @@ var canvas = document.getElementById('drawer');
 var ctx = canvas.getContext('2d');
 var ratio = 2
 drewPoints = []
+if(!ga){
+    function ga(a, b, c, d, e){
+        return;
+    }
+}
 function record(x, y){
     x = Number.parseInt(x / ratio) * ratio
     y = Number.parseInt(y / ratio) * ratio
@@ -30,6 +35,7 @@ if (document.body.ontouchstart !== undefined) {
     canvas.ontouchstart = function (e) {
         if(!window.login){
             alert('请先登录~')
+            ga('send', 'event', '100Bits!', 'interact', 'notLoggedIn');
             return
         }
 
@@ -38,12 +44,14 @@ if (document.body.ontouchstart !== undefined) {
         if(countLeft - drewPoints.length > 0){
             draw(x,y)
             record(x,y)
+            ga('send', 'event', '100Bits!', 'drawTouch', 'x:' + x + ',y: ' + y);
         }
     }
 } else {
     canvas.onmousedown = function(e) {
         if(!window.login){
             alert('请先登录~')
+            ga('send', 'event', '100Bits!', 'interact', 'notLoggedIn');
             return
         }
         var x = e.pageX  - canvas.offsetLeft
@@ -51,6 +59,7 @@ if (document.body.ontouchstart !== undefined) {
         if(countLeft - drewPoints.length > 0){
             draw(x,y)
             record(x,y)
+            ga('send', 'event', '100Bits!', 'drawMouse', 'x:' + x + ',y: ' + y);
         }
     }
 }
