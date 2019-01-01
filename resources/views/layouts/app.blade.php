@@ -31,8 +31,8 @@
                             <a href="{{ url('/') }}">{{ config('app.name', '100Bits!') }}</a>
                         </li>
                         <li><a href="#">往期作品(暂无)</a></li>
-                        <li><a href="https://jq.qq.com/?_wv=1027&k=5iIEkDx">4:20叫我写代码</a></li>
-                        <li><a href="https://lss233.com">Lss233的首页</a></li>
+                        <li><a href="https://jq.qq.com/?_wv=1027&k=5iIEkDx" target="_blank">4:20叫我写代码</a></li>
+                        <li><a href="https://lss233.com" target="_blank">Lss233的首页</a></li>
                         <li><a href="#" uk-toggle="target: #about">关于</a></li>
                     </ul>
 
