@@ -15,7 +15,7 @@ function record(x, y){
     for (let i = 0; i < drewPoints.length; i++) {
         const element = drewPoints[i];
         if(element[0] == x && element[1] == y){
-            drewPoints.splice(element,1)
+            drewPoints.splice(i,1)
             return
         }
     }
