@@ -42,7 +42,7 @@ class DrawController extends Controller
                 $ph->save();
             }
             //Update
-            foreach($this->get() as $e){
+            foreach($this->get(true) as $e){
                 if(isset($plateArray[$e->x][$e->y])){
                     $plateArray[$e->x][$e->y] = !$plateArray[$e->x][$e->y];
                 } else {
@@ -92,15 +92,15 @@ class DrawController extends Controller
         ->count();
     }
 
-    public function get(){
-        $old = Plate::orderBy('updated_at', 'desc')->first();
-        if(isset($old)){
+    public function get($ex = false){
+        if($ex){
+	    $old = Plate::orderBy('updated_at', 'desc')->first();
             return Draw::whereMonth(
                 'created_at', '>=', $old->updated_at
             )->get();
         } else {
             return Draw::whereMonth(
-                'created_at', '>=', Carbon::now()->subMonth()->month - 1
+                'created_at', '<=', Carbon::now()->subMonth()->month - 1
             )->get();
         }
     }
