@@ -142,6 +142,7 @@ $(document).ready(function() {
     }).then(res => {
         countLeft = 100 - Number.parseInt(res)
         $('[data-label=countLeft').text(countLeft - drewPoints.length)
+        playBtn.click()
     })
 
     $.get('api/plate')
@@ -219,5 +220,4 @@ $(document).ready(function() {
             UIkit.notification('上传失败! 太多bug了..');
          })
     })
-    playBtn.click()
 });
