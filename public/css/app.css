@@ -1,4 +1,12 @@
+@font-face{
+    font-family: 'SilkScreen';
+    src : url('/fonts/slkscr.ttf');
+}
 
+body {
+    font-family: 'SilkScreen', 'Courier', monospace;
+    -webkit-font-smoothing : none;
+}
 /*==================================================
  * Effect 2
  * ===============================================*/

@@ -77,23 +77,26 @@ $(document).ready(function() {
     var backwardBtn = $('.btn-backward')
     var resetBtn = $('.btn-reset')
     var uploadBtn = $('.btn-upload')
+    var immediatelyRender = (pos, checkReserve=false) => {
+        return function (){
+            var point = last[pos]
+            $('[data-label=current-pos]').text(pos)
+            $('[data-label=total-pos]').text(last.length)
+            if(point != undefined){
+                draw(point[0], point[1])
+                $('[data-label=user]').text(point[2])
+                if(checkReserve)
+                    if(isReserve){
+                        progressbar.val(Number.parseInt(pos) - 1)
+                    } else {
+                        progressbar.val(Number.parseInt(pos) + 1)
+                    }
+            }
+        }
+    }
     var performDrew = () => {
         enableBtn(playBtn)
-        if(isReserve){
-            progressbar.val(progressbar.val() - 1)
-            point = last[progressbar.val()]
-            if(point != undefined){
-                draw(point[0], point[1])
-                $('[data-label=user]').text(point[2])
-            }
-        } else {
-            point = last[progressbar.val()]
-            if(point != undefined){
-                draw(point[0], point[1])
-                $('[data-label=user]').text(point[2])
-            }
-            progressbar.val(progressbar.val() + 1)
-        }
+        setImmediate(immediatelyRender(progressbar.val(), true))
         if(progressbar.val() == last.length && !isReserve){
             clearInterval(playProgress)
             inactiveBtn(playBtn)
@@ -130,6 +133,19 @@ $(document).ready(function() {
     var enableBtn = (btn) => {
         return btn.attr('disabled', false)
     }
+    var serialDraw = (pos) => {
+        clearInterval(playProgress)
+        inactiveBtn(playBtn)
+        var current = Number.parseInt($('[data-label=current-pos]').text())
+        for(; current != pos;){
+            setImmediate(immediatelyRender(current))
+            if(pos > current)
+                current ++
+            else if(pos < current)
+                current --
+        }
+    }
+
     $.get('api/pic')
      .then(res =>{
         res.forEach(e => {
@@ -149,7 +165,15 @@ $(document).ready(function() {
         plate.src = res.url
         ctx.drawImage(plate, 0, 0)
     })
-
+    $('canvas').click(() => {
+        if(Number.parseInt($('[data-label=current-pos]').text()) != Number.parseInt($('[data-label=total-pos]').text())){
+            serialDraw(last.length + 1)
+            progressbar.val(last.length)
+        }
+    })
+    progressbar.change(() => {
+        serialDraw(Number.parseInt(progressbar.val()))
+    })
     nextBtn.click(performDrew)
     prevBtn.click(() => {
         isReserve = true

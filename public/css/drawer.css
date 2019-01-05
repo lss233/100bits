@@ -30,3 +30,17 @@ body {
     color: rgba(33, 33, 33, 0.87);
     background-color: #eee;
 }
+.progressbar {
+    width: 100%;
+}
+.progressbar > span{
+    width: 9%;
+    display: inline-block;
+    text-align: center;
+}
+.progressbar > span:nth-child(1){
+    margin-left: 10px;
+}
+.progressbar > #progressbar {
+    width: 75%;
+}

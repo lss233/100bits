@@ -6,7 +6,11 @@
             <canvas id="drawer" width="1000" height="500"></canvas>
             <div class="toolbar effect2">
                 <div uk-grid>
-                    <progress id="progressbar" class="uk-progress" value="0" max="100"></progress>
+                    <div class="progressbar uk-margin">
+                        <span data-label="current-pos">0</span>
+                        <input class="uk-range" id="progressbar" type="range" value="0" min="0" max="100" step="1">
+                        <span data-label="total-pos">---</span>
+                    </div>
 
                     <button
                         uk-tooltip="播放"
