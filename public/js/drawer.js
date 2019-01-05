@@ -30,18 +30,16 @@ function draw(x, y){
     ctx.fillStyle = p ? '#fff': '#000'
     ctx.fillRect(x,y,ratio,ratio);
 }
-if (document.body.ontouchstart !== undefined) {
-
-    if(!window.login){
-        var askLogin = function (e){
-            alert('请先登录~')
-            ga('send', 'event', '100Bits!', 'interact', 'notLoggedIn');
-            return
-        }
-        canvas.onmouseup = askLogin
-        canvas.ontouchend = askLogin
+if(!window.login){
+    var askLogin = function (e){
+        alert('请先登录~')
+        ga('send', 'event', '100Bits!', 'interact', 'notLoggedIn');
+        return
     }
-
+    canvas.onmouseup = askLogin
+    canvas.ontouchend = askLogin
+}
+if (document.body.ontouchstart !== undefined) {
     // Mobile
     canvas.ontouchstart = function (e) {
         var x = e.touches[0].pageX - canvas.offsetLeft
