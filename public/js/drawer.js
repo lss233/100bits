@@ -31,15 +31,18 @@ function draw(x, y){
     ctx.fillRect(x,y,ratio,ratio);
 }
 if (document.body.ontouchstart !== undefined) {
-    // Mobile
+
     if(!window.login){
-        canvas.onmouseup = function (e){
+        var askLogin = function (e){
             alert('请先登录~')
             ga('send', 'event', '100Bits!', 'interact', 'notLoggedIn');
             return
         }
-        canvas.ontouchend = canvas.onmouseup
+        canvas.onmouseup = askLogin
+        canvas.ontouchend = askLogin
     }
+
+    // Mobile
     canvas.ontouchstart = function (e) {
         var x = e.touches[0].pageX - canvas.offsetLeft
         var y = e.touches[0].pageY - canvas.offsetTop
