@@ -136,11 +136,11 @@ $(document).ready(function() {
             last.push([e.x, e.y, e.user])
         });
         progressbar.attr('max', last.length)
+        playBtn.click()
         return $.get('count')
     }).then(res => {
         countLeft = 100 - Number.parseInt(res)
         $('[data-label=countLeft').text(countLeft - drewPoints.length)
-        playBtn.click()
     })
 
     $.get('api/plate')
