@@ -32,13 +32,15 @@ function draw(x, y){
 }
 if (document.body.ontouchstart !== undefined) {
     // Mobile
-    canvas.ontouchstart = function (e) {
-        if(!window.login){
+    if(!window.login){
+        canvas.onmouseup = function (e){
             alert('请先登录~')
             ga('send', 'event', '100Bits!', 'interact', 'notLoggedIn');
             return
         }
-
+        canvas.ontouchend = canvas.onmouseup
+    }
+    canvas.ontouchstart = function (e) {
         var x = e.touches[0].pageX - canvas.offsetLeft
         var y = e.touches[0].pageY - canvas.offsetTop
         if(countLeft - drewPoints.length > 0){
