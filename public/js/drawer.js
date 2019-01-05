@@ -51,11 +51,6 @@ if (document.body.ontouchstart !== undefined) {
     }
 } else {
     canvas.onmousedown = function(e) {
-        if(!window.login){
-            alert('请先登录~')
-            ga('send', 'event', '100Bits!', 'interact', 'notLoggedIn');
-            return
-        }
         var x = e.pageX  - canvas.offsetLeft
         var y = e.pageY - canvas.offsetTop
         if(countLeft - drewPoints.length > 0){
@@ -113,6 +108,9 @@ $(document).ready(function() {
             disableBtn(playBtn)
             disableBtn(prevBtn)
             disableBtn(backwardBtn)
+            enableBtn(nextBtn)
+            enableBtn(towardBtn)
+        } else if(progressbar.val() > 0 && progressbar.val() < last.length){
             enableBtn(nextBtn)
             enableBtn(towardBtn)
         }
